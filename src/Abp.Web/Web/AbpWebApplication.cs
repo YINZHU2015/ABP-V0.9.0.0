@@ -70,14 +70,17 @@ namespace Abp.Web
         /// </summary>
         protected virtual void Application_BeginRequest(object sender, EventArgs e)
         {
+            //获取cookie语言环境值
             var langCookie = Request.Cookies["Abp.Localization.CultureName"];
             if (langCookie != null && GlobalizationHelper.IsValidCultureCode(langCookie.Value))
             {
+                //设置当前语言环境
                 Thread.CurrentThread.CurrentCulture = new CultureInfo(langCookie.Value);
                 Thread.CurrentThread.CurrentUICulture = new CultureInfo(langCookie.Value);
             }
             else if (!Request.UserLanguages.IsNullOrEmpty())
             {
+                //获取客户端默认语言环境
                 var firstValidLanguage = Request
                     .UserLanguages
                     .FirstOrDefault(GlobalizationHelper.IsValidCultureCode);
@@ -100,6 +103,7 @@ namespace Abp.Web
 
         protected virtual void Application_AuthenticateRequest(object sender, EventArgs e)
         {
+            //尝试设置一个当前请求的租户信息
             TrySetTenantId();
         }
 

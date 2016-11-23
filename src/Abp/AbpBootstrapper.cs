@@ -10,11 +10,13 @@ namespace Abp
     /// This is the main class that is responsible to start entire ABP system.
     /// Prepares dependency injection and registers core components needed for startup.
     /// It must be instantiated and initialized (see <see cref="Initialize"/>) first in an application.
+    /// 这是ABP系统启动对象，负责在程序启动的时候准备IOC容器和注册组件，必须在application启动的时候第一个被执行
     /// </summary>
     public class AbpBootstrapper : IDisposable
     {
         /// <summary>
         /// Gets IIocManager object used by this class.
+        /// 获取Ioc容器
         /// </summary>
         public IIocManager IocManager { get; private set; }
 
